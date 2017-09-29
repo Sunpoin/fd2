@@ -1,0 +1,42 @@
+.index-layout{
+    background: #fff;
+    position: relative;
+    overflow: hidden;
+}
+.index-layout-left{
+    background: #F7F7F7;
+    overflow: auto;
+}
+.index-layout-left , .index-layout-right{
+    height: 100vh;
+}
+
+.index-layout-left-header{
+    background: url("../images/logo.svg") no-repeat 50% 50%;
+    background-size:  24px 24px;
+    background-color: #464c5b;
+    height: 64px;
+    width:100%;
+    color: #fff;
+    font-size: 20px;
+    padding-top: 16px;
+    text-align: center;
+}
+
+.index-layout-right-header{
+    background-color: #F7F7F7;
+    width:100%;
+    height: 64px;
+}
+
+.index-layout-right-content{
+    height: 100vh;
+    background-color: #fff;
+}
+
+.index-layout-right-ctrlpanel{
+     /* height: 300px;  纵向滚动条必要条件 */
+    white-space:nowrap; /* 横向滚动条必要条件 */
+    border: 1px dotted  #464C5B;
+    overflow: auto;;
+}
