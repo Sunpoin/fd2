@@ -8,87 +8,50 @@
             <div class="index-layout-left-header">Form Designer</div>
             <Collapse v-model="accordionActivity" accordion>
                 <Panel name="1">
-                    史蒂夫·乔布斯
-                    <p slot="content">史蒂夫·乔布斯（Steve Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。</p>
-                    <p slot="content">史蒂夫·乔布斯（Steve Jobs），1955年2月24日生于美国加利福尼亚州旧金山，美国发明家、企业家、美国苹果公司联合创办人。</p>
+                    基础控件
+                    <p slot="content" id="stype_layout" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                        <Icon type="ios-gear"></Icon>
+                        <span>Grid 栅格</span>
+                    </p>
+                    <p slot="content" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                        <Icon type="ios-gear"></Icon>
+                        <span>Area 区域</span>
+                    </p>
+                    <p slot="content" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                        <Icon type="ios-gear"></Icon>
+                        <span>Textbox 单行文本</span>
+                    </p>
+                    <p slot="content" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                        <Icon type="ios-gear"></Icon>
+                        <span>Textarea 多行文本</span>
+                    </p>
                 </Panel>
                 <Panel name="2">
-                    斯蒂夫·盖瑞·沃兹尼亚克
+                    自定义控件
                     <p slot="content">斯蒂夫·盖瑞·沃兹尼亚克（Stephen Gary Wozniak），美国电脑工程师，曾与史蒂夫·乔布斯合伙创立苹果电脑（今之苹果公司）。斯蒂夫·盖瑞·沃兹尼亚克曾就读于美国科罗拉多大学，后转学入美国著名高等学府加州大学伯克利分校（UC Berkeley）并获得电机工程及计算机（EECS）本科学位（1987年）。</p>
-                </Panel>
-                <Panel name="3">
-                    乔纳森·伊夫
-                    <p slot="content">乔纳森·伊夫是一位工业设计师，现任Apple公司设计师兼资深副总裁，英国爵士。他曾参与设计了iPod，iMac，iPhone，iPad等众多苹果产品。除了乔布斯，他是对苹果那些著名的产品最有影响力的人。</p>
                 </Panel>
             </Collapse>
             </Col>
             <Col :span="spanRight" class="index-layout-right">
             <div class="index-layout-right-header">
-                This is buttons zone.
+                <div class="index-layout-right-header-btns">
+                    <Button type="primary" icon="refresh" @click="ctrlpanelReset">重置</Button>
+                    <Button type="primary" icon="checkmark">保存</Button>
+                </div>
             </div>
             <div class="index-layout-right-content">
-                <div class="index-layout-right-ctrlpanel" :style="{'height':ctrlpanelHeight,'display':ctrlpanelState}">内容区域 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/> 内容区域
-                    <br/>
+                <div class="index-layout-right-ctrlpanel"  @drop='ctrlpanelDrop($event)' @dragover='ctrlpanelDragover($event)' :style="{'height':ctrlpanelHeight,'display':ctrlpanelState}">
+                         <template v-for="(ctrl,idx) in ctrls">
+                            <template v-if="ctrl.type == 'stype_layout'">
+                                    <template v-for="attr in ctrl.attributes">
+                                             <Row>
+                                                <template v-for="colValue in attr.col">
+                                                     <Col :span="colValue">col-{{colValue}}</Col>
+                                                </template>
+                                             </Row>
+                                    </template>
+                            </template>
+                        </template>
                 </div>
             </div>
             </Col>
@@ -99,11 +62,26 @@
 export default {
     data() {
         return {
+            dragDataTransferContent: "drag-tran-ctrlId", // 传递拖拽内容的ID标识
+            hearderHeight: 64, // 头部高度（对应CSS中的数值）
             accordionActivity: "1",
             ctrlpanelHeight: "0px",
             ctrlpanelState: "none",
+            ctrlpanelContent: "",
             spanLeft: 4,
-            spanRight: 20
+            spanRight: 20,
+            defaultCtrls:[
+                {
+                    type:"none",
+                    attributes:[
+                        {
+                            col:[6,12,6]
+                        }
+                    ],
+                    children:[]
+                }
+            ],
+            ctrls:[]
         }
     },
     computed: {
@@ -113,9 +91,33 @@ export default {
     },
     methods: {
 
+        // 清空控件面板内容
+        ctrlpanelReset: function() {
+            this.ctrls = this.defaultCtrls;
+        },
+
+        // 开始拖拽：传递被拖拽控件的ID
+        ctrlDragStart: function(evt) {
+            var id = evt.target.id;
+            evt.dataTransfer.setData(this.dragDataTransferContent, id);
+        },
+        ctrlpanelDrop: function(evt) {
+            evt.preventDefault();
+            var id = evt.dataTransfer.getData(this.dragDataTransferContent);
+            var obj = evt.target.type; // 判断当前停留的容器，并开始遍历 ctrls ，找到对应的 type ，然后注入type值，如下：
+
+            // 如果是第一个组件，则使用默认，并启用type值
+            this.ctrls = JSON.parse(JSON.stringify(this.defaultCtrls));
+            this.ctrls[0].type = id;
+
+            evt.dataTransfer.clearData(this.dragDataTransferContent);
+        },
+        ctrlpanelDragover: function(evt) {
+            evt.preventDefault();
+        }
     },
     mounted: function() {
-        this.ctrlpanelHeight = window.document.body.offsetHeight - 64 + "px";
+        this.ctrlpanelHeight = window.document.body.offsetHeight - this.hearderHeight + "px";
         this.ctrlpanelState = "block";
     }
 }
