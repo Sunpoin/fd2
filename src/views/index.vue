@@ -106,6 +106,7 @@ export default {
         }
     },
     mounted: function() {
+        // 调整滚动条
         this.ctrlpanelHeight = window.document.body.offsetHeight - this.hearderHeight + "px";
         this.ctrlpanelState = "block";
     }
