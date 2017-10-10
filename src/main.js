@@ -5,11 +5,14 @@ import Routers from './router';
 import Util from './libs/util';
 import App from './app.vue';
 import 'iview/dist/styles/iview.css';
+import SPLayout from "./coms/layout/spLayout"
 
 Vue.use(VueRouter);
 Vue.use(iView);
 
-// 路由配置
+Vue.use(SPLayout);
+
+// 路由配置 
 const RouterConfig = {
     mode: 'history',
     routes: Routers

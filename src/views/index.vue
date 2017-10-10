@@ -9,7 +9,7 @@
             <Collapse v-model="accordionActivity" accordion>
                 <Panel name="1">
                     基础控件
-                    <p slot="content" id="stype_layout" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                    <p slot="content" id="sp_layout" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
                         <Icon type="ios-gear"></Icon>
                         <span>Grid 栅格</span>
                     </p>
@@ -41,17 +41,7 @@
             </div>
             <div class="index-layout-right-content">
                 <div class="index-layout-right-ctrlpanel"  @drop='ctrlpanelDrop($event)' @dragover='ctrlpanelDragover($event)' :style="{'height':ctrlpanelHeight,'display':ctrlpanelState}">
-                         <template v-for="(ctrl,idx) in ctrls">
-                            <template v-if="ctrl.type == 'stype_layout'">
-                                    <template v-for="attr in ctrl.attributes">
-                                             <Row>
-                                                <template v-for="colValue in attr.col">
-                                                     <Col :span="colValue">col-{{colValue}}</Col>
-                                                </template>
-                                             </Row>
-                                    </template>
-                            </template>
-                        </template>
+                    <sp-layout  v-for="item in ctrls" :item="item" :key="item.type"></sp-layout>
                 </div>
             </div>
             </Col>
@@ -72,7 +62,7 @@ export default {
             spanRight: 20,
             defaultCtrls:[
                 {
-                    type:"none",
+                    type:"sp_layout",
                     attributes:[
                         {
                             col:[6,12,6]
@@ -93,7 +83,7 @@ export default {
 
         // 清空控件面板内容
         ctrlpanelReset: function() {
-            this.ctrls = this.defaultCtrls;
+            this.ctrls = [];
         },
 
         // 开始拖拽：传递被拖拽控件的ID
@@ -107,8 +97,7 @@ export default {
             var obj = evt.target.type; // 判断当前停留的容器，并开始遍历 ctrls ，找到对应的 type ，然后注入type值，如下：
 
             // 如果是第一个组件，则使用默认，并启用type值
-            this.ctrls = JSON.parse(JSON.stringify(this.defaultCtrls));
-            this.ctrls[0].type = id;
+            this.ctrls.push(JSON.parse(JSON.stringify(this.defaultCtrls[0])));
 
             evt.dataTransfer.clearData(this.dragDataTransferContent);
         },
