@@ -3,16 +3,14 @@ import iView from "iview";
 import VueRouter from "vue-router";
 import Routers from "./router";
 import Util from "./libs/util";
+import SPLib from "./components/splib.js";
 import App from "./app.vue";
 import "iview/dist/styles/iview.css";
 
-import SPGrid from "./components/spGrid";
-import SPInput from "./components/spInput";
 
 Vue.use(VueRouter);
 Vue.use(iView);
-Vue.component("sp-grid", SPGrid);
-Vue.component("sp-input", SPInput);
+Vue.prototype.SPLib = SPLib;
 
 
 // 路由配置 
@@ -37,4 +35,4 @@ new Vue({
     el: "#app",
     router: router,
     render: h => h(App)
-});
+}).SPLib.init(Vue);
