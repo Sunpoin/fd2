@@ -10,8 +10,7 @@ import "iview/dist/styles/iview.css";
 
 Vue.use(VueRouter);
 Vue.use(iView);
-Vue.prototype.SPLib = SPLib;
-
+Vue.use(SPLib);
 
 // 路由配置 
 const RouterConfig = {
@@ -31,8 +30,8 @@ router.afterEach((to, from, next) => {
     window.scrollTo(0, 0);
 });
 
-new Vue({
+let vm = new Vue({
     el: "#app",
     router: router,
     render: h => h(App)
-}).SPLib.init(Vue);
+});
