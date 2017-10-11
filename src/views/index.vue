@@ -9,7 +9,7 @@
             <Collapse v-model="accordionActivity" accordion>
                 <Panel name="1">
                     基础控件
-                    <p slot="content" id="sp_layout" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                    <p slot="content" id="sp-resolver" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
                         <Icon type="ios-gear"></Icon>
                         <span>Grid 栅格</span>
                     </p>
@@ -41,7 +41,9 @@
             </div>
             <div class="index-layout-right-content">
                 <div class="index-layout-right-ctrlpanel"  @drop='ctrlpanelDrop($event)' @dragover='ctrlpanelDragover($event)' :style="{'height':ctrlpanelHeight,'display':ctrlpanelState}">
-                    <sp-layout  v-for="item in ctrls" :item="item" :key="item.type"></sp-layout>
+                    <template v-for="(n,i) in ctrls">
+                        <sp-grid :item='n' :key="i" ></sp-grid>
+                    </template>
                 </div>
             </div>
             </Col>
@@ -61,17 +63,39 @@ export default {
             spanLeft: 4,
             spanRight: 20,
             defaultCtrls:[
-                {
-                    type:"sp_layout",
-                    attributes:[
-                        {
-                            col:[6,12,6]
-                        }
-                    ],
-                    children:[]
-                }
             ],
-            ctrls:[]
+            formItem:{
+                input:"90234"
+            },
+            ctrls:[
+                {
+                    type:"sp-grid",
+                    cols:[
+                        {
+                            span:12,
+                            children:[
+                                {
+                                    type:"sp-input",
+                                    label:"姓名",
+                                    value:"超级飞侠",
+                                    placeholder:"请输入"
+                                }
+                            ]
+                        },
+                        {
+                            span:12,
+                            children:[
+                                {
+                                    type:"sp-input",
+                                    label:"姓名",
+                                    value:"超级飞侠2",
+                                    placeholder:"请输入"
+                                }
+                            ]
+                        }
+                    ]
+                }
+            ]
         }
     },
     computed: {
@@ -84,6 +108,10 @@ export default {
         // 清空控件面板内容
         ctrlpanelReset: function() {
             this.ctrls = [];
+        },
+        resolver:function(){
+            let result = this.SPResolver.processor(this.ctrls);
+            return result;
         },
 
         // 开始拖拽：传递被拖拽控件的ID

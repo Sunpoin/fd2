@@ -1,20 +1,23 @@
-import Vue from 'vue';
-import iView from 'iview';
-import VueRouter from 'vue-router';
-import Routers from './router';
-import Util from './libs/util';
-import App from './app.vue';
-import 'iview/dist/styles/iview.css';
-import SPLayout from "./coms/layout/spLayout"
+import Vue from "vue";
+import iView from "iview";
+import VueRouter from "vue-router";
+import Routers from "./router";
+import Util from "./libs/util";
+import App from "./app.vue";
+import "iview/dist/styles/iview.css";
+
+import SPGrid from "./components/spGrid";
+import SPInput from "./components/spInput";
 
 Vue.use(VueRouter);
 Vue.use(iView);
+Vue.component("sp-grid", SPGrid);
+Vue.component("sp-input", SPInput);
 
-Vue.use(SPLayout);
 
 // 路由配置 
 const RouterConfig = {
-    mode: 'history',
+    mode: "history",
     routes: Routers
 };
 const router = new VueRouter(RouterConfig);
@@ -31,7 +34,7 @@ router.afterEach((to, from, next) => {
 });
 
 new Vue({
-    el: '#app',
+    el: "#app",
     router: router,
     render: h => h(App)
 });
