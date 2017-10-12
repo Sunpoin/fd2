@@ -20,7 +20,7 @@ export default {
     props: ["item"],
     data() {
         return {
-            construct: {
+            dataModel: {
                 type: "sp-grid",
                 cols: [
                     {
