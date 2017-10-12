@@ -21,7 +21,7 @@ export default {
     data() {
         return {
             dataModel: {
-                type: "sp-grid",
+                type: this.name,
                 cols: [
                     {
                         span: 12,

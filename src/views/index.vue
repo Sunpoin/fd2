@@ -40,6 +40,7 @@
                 </div>
             </div>
             <div class="index-layout-right-content">
+                {{SPLib.dataModels}}
                 <div class="index-layout-right-ctrlpanel"  @drop='ctrlpanelDrop($event)' @dragover='ctrlpanelDragover($event)' :style="{'height':ctrlpanelHeight,'display':ctrlpanelState}">
                     <template v-for="(n,i) in ctrls">
                         <sp-grid :item='n' :key="i" ></sp-grid>

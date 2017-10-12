@@ -12,6 +12,16 @@
 export default {
     name: "sp-input",
     props: ["item"],
+    data() {
+        return {
+            dataModel: {
+                type: this.name,
+                label:"姓名",
+                value:"超级飞侠",
+                placeholder:"请输入"
+            }
+        }
+    },
     methods: {
     }
 }

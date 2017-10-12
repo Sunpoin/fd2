@@ -19,21 +19,21 @@ import SPInput from "./spInput";
  * 
 */
 let SPLib = function () {
-    
+
 }
 
 /** 组件安装方法 在 Vue.user(SPLib) 时触发 */
-SPLib.install = function(Vue, options){
+SPLib.install = function (Vue, options) {
     Vue.prototype.SPLib = SPLib;
     SPLib.init(Vue);
 }
 
 /** 动态将组件字典中的组件注册到 Vue 中 */
 SPLib.init = function (Vue) {
-    for (var key in this.templates) {
-        if (this.templates.hasOwnProperty(key)) {
-            Vue.component(key, this.templates[key]);
-            this.dataModels[key] = this.templates[key].dataModel;
+    for (var key in SPLib.templates) {
+        if (SPLib.templates.hasOwnProperty(key)) {
+            Vue.component(key, SPLib.templates[key]);
+            SPLib.dataModels[key] = SPLib.templates[key]["data"]().dataModel;
         }
     }
 }
