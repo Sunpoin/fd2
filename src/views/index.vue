@@ -9,21 +9,25 @@
             <Collapse v-model="accordionActivity" accordion>
                 <Panel name="1">
                     基础控件
-                    <p slot="content" id="sp-resolver" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                    <p slot="content" id="ctrlGrid" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
                         <Icon type="ios-gear"></Icon>
                         <span>Grid 栅格</span>
                     </p>
-                    <p slot="content" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                    <p slot="content" id="ctrlArea" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
                         <Icon type="ios-gear"></Icon>
                         <span>Area 区域</span>
                     </p>
-                    <p slot="content" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                    <p slot="content" id="ctrlText" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
                         <Icon type="ios-gear"></Icon>
                         <span>Textbox 单行文本</span>
                     </p>
-                    <p slot="content" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                    <p slot="content" id="ctrlTexts" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
                         <Icon type="ios-gear"></Icon>
                         <span>Textarea 多行文本</span>
+                    </p>
+                    <p id="ctrlButton" ctrlType="sp-button" slot="content" class="index-layout-left-ctrl" draggable="true" @dragstart="ctrlDragStart($event)">
+                        <Icon type="ios-gear"></Icon>
+                        <span>Button 按钮</span>
                     </p>
                 </Panel>
                 <Panel name="2">
@@ -34,16 +38,16 @@
             </Col>
             <Col :span="spanRight" class="index-layout-right">
             <div class="index-layout-right-header">
-                <div class="index-layout-right-header-btns">
+                <div class="index-layout-right-header-btns" @drop='ctrlpanelDrop($event)' @dragover='ctrlpanelDragover($event)'>
                     <Button type="primary" icon="refresh" @click="ctrlpanelReset">重置</Button>
                     <Button type="primary" icon="checkmark">保存</Button>
                 </div>
             </div>
             <div class="index-layout-right-content">
-                {{SPLib.dataModels}}
-                <div class="index-layout-right-ctrlpanel"  @drop='ctrlpanelDrop($event)' @dragover='ctrlpanelDragover($event)' :style="{'height':ctrlpanelHeight,'display':ctrlpanelState}">
+                <!-- {{SPLib.dataModels['sp-button']}} -->
+                <div class="index-layout-right-ctrlpanel" :style="{'height':ctrlpanelHeight,'display':ctrlpanelState}">
                     <template v-for="(n,i) in ctrls">
-                        <sp-grid :item='n' :key="i" ></sp-grid>
+                        <sp-gridS :item='n' :key="i"></sp-gridS>
                     </template>
                 </div>
             </div>
@@ -52,10 +56,12 @@
     </div>
 </template>
 <script>
+import SPLib from "../components/splib.js";
+
 export default {
     data() {
         return {
-            dragDataTransferContent: "drag-tran-ctrlId", // 传递拖拽内容的ID标识
+            dragDataTransferID: "drag-tran-ctrlId", // 传递拖拽内容的ID标识
             hearderHeight: 64, // 头部高度（对应CSS中的数值）
             accordionActivity: "1",
             ctrlpanelHeight: "0px",
@@ -68,30 +74,33 @@ export default {
             formItem:{
                 input:"90234"
             },
+            btnItem: SPLib.dataModels['sp-button'],
             ctrls:[
                 {
-                    type:"sp-grid",
+                    type:"sp-gridS",
                     cols:[
                         {
                             span:12,
+                            id: 'col1',
                             children:[
-                                {
-                                    type:"sp-input",
-                                    label:"姓名",
-                                    value:"超级飞侠",
-                                    placeholder:"请输入"
-                                }
+                                // {
+                                //     type:"sp-input",
+                                //     label:"姓名",
+                                //     value:"超级飞侠",
+                                //     placeholder:"请输入"
+                                // }
                             ]
                         },
                         {
                             span:12,
+                            id: 'col2',
                             children:[
-                                {
-                                    type:"sp-input",
-                                    label:"姓名",
-                                    value:"超级飞侠2",
-                                    placeholder:"请输入"
-                                }
+                                // {
+                                //     type:"sp-input",
+                                //     label:"姓名",
+                                //     value:"超级飞侠2",
+                                //     placeholder:"请输入"
+                                // }
                             ]
                         }
                     ]
@@ -105,7 +114,9 @@ export default {
         }
     },
     methods: {
-
+        onClick: function() {
+            alert("Test");
+        },
         // 清空控件面板内容
         ctrlpanelReset: function() {
             this.ctrls = [];
@@ -118,17 +129,18 @@ export default {
         // 开始拖拽：传递被拖拽控件的ID
         ctrlDragStart: function(evt) {
             var id = evt.target.id;
-            evt.dataTransfer.setData(this.dragDataTransferContent, id);
+            evt.dataTransfer.setData(this.dragDataTransferID, id);
         },
         ctrlpanelDrop: function(evt) {
             evt.preventDefault();
-            var id = evt.dataTransfer.getData(this.dragDataTransferContent);
+            var id = evt.dataTransfer.getData(this.dragDataTransferID);
             var obj = evt.target.type; // 判断当前停留的容器，并开始遍历 ctrls ，找到对应的 type ，然后注入type值，如下：
 
+            console.log(evt);
             // 如果是第一个组件，则使用默认，并启用type值
-            this.ctrls.push(JSON.parse(JSON.stringify(this.defaultCtrls[0])));
+            // this.ctrls.push(JSON.parse(JSON.stringify(this.defaultCtrls[0])));
 
-            evt.dataTransfer.clearData(this.dragDataTransferContent);
+            evt.dataTransfer.clearData(this.dragDataTransferID);
         },
         ctrlpanelDragover: function(evt) {
             evt.preventDefault();

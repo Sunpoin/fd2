@@ -1,5 +1,8 @@
 import SPGrid from "./spGrid";
 import SPInput from "./spInput";
+import SPButton from "./spButton";
+import SPGridS from "../comsetup/spGridS";
+import SPItemS from "../comsetup/spItemS";
 
 /** 组件协作器
  * 辅助解析组件的公共方法：
@@ -46,7 +49,10 @@ SPLib.dataModels = {
 /** 组件模板字典集合 */
 SPLib.templates = {
     "sp-grid": SPGrid,
-    "sp-input": SPInput
+    "sp-input": SPInput,
+    "sp-button": SPButton,
+    "sp-gridS": SPGridS,
+    "sp-itemS": SPItemS
 }
 
 export default SPLib;
