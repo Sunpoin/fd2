@@ -3,6 +3,7 @@ import SPInput from "./spInput";
 import SPButton from "./spButton";
 import SPGridS from "../comsetup/spGridS";
 import SPItemS from "../comsetup/spItemS";
+import SPAttrsS from "../comsetup/spAttrsS";
 
 /** 组件协作器
  * 辅助解析组件的公共方法：
@@ -52,7 +53,8 @@ SPLib.templates = {
     "sp-input": SPInput,
     "sp-button": SPButton,
     "sp-gridS": SPGridS,
-    "sp-itemS": SPItemS
+    "sp-itemS": SPItemS,
+    "sp-attrsS": SPAttrsS
 }
 
 export default SPLib;

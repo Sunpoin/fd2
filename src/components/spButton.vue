@@ -1,7 +1,7 @@
 <template>
     <div>
         <template v-if="item.type == 'sp-button'">
-            <Button type="primary" :icon="item.icon" @click="item.onClick">{{item.name}}</Button>
+            <Button :id="item.id" type="primary" @click="onClick" :style="styleObject" :icon="item.icon" :size="item.size" :enable="item.enable" :long="item.long == 'true'? '' : null" :disabled="item.enable == 'enable'? null : ''">{{item.name}}</Button>
         </template>
     </div>
 </template>
@@ -16,13 +16,26 @@
                     type: this.name,
                     icon: "",
                     name: "Button",
-                    onClick: function(){
-                        alert("This is a button.");
-                    }
+                    clickStr: ""
                 }
             }
         },
+        computed: {
+            styleObject: function () {
+                return {
+                    'font-size': this.item.fontSize + 'px',
+                    color: this.item.color
+                };
+            }
+        },
         methods: {
+            onClick: function() {
+                try  {
+                    eval(this.item.clickStr);
+                } catch (exception) {
+                    console.error("按钮点击事件执行错误：", exception);
+                }
+            }
         }
     }
  </script>

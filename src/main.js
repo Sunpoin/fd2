@@ -4,6 +4,7 @@ import VueRouter from "vue-router";
 import Routers from "./router";
 import Util from "./libs/util";
 import SPLib from "./components/splib.js";
+import SPSetup from "./comsetup/spSetup.js";
 import App from "./app.vue";
 import "iview/dist/styles/iview.css";
 
@@ -11,6 +12,7 @@ import "iview/dist/styles/iview.css";
 Vue.use(VueRouter);
 Vue.use(iView);
 Vue.use(SPLib);
+Vue.use(SPSetup);
 
 // 路由配置 
 const RouterConfig = {
